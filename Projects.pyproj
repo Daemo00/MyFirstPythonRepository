@@ -21,5 +21,89 @@
   <ItemGroup>
     <InterpreterReference Include="Global|ContinuumAnalytics|Anaconda36-64" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="django\django-polls\polls\admin.py" />
+    <Compile Include="django\django-polls\polls\apps.py" />
+    <Compile Include="django\django-polls\polls\migrations\0001_initial.py" />
+    <Compile Include="django\django-polls\polls\migrations\__init__.py" />
+    <Compile Include="django\django-polls\polls\models.py" />
+    <Compile Include="django\django-polls\polls\tests.py" />
+    <Compile Include="django\django-polls\polls\urls.py" />
+    <Compile Include="django\django-polls\polls\views.py" />
+    <Compile Include="django\django-polls\polls\__init__.py" />
+    <Compile Include="django\django-polls\setup.py" />
+    <Compile Include="django\manage.py" />
+    <Compile Include="django\mysite\settings.py" />
+    <Compile Include="django\mysite\urls.py" />
+    <Compile Include="django\mysite\wsgi.py" />
+    <Compile Include="django\mysite\__init__.py" />
+    <Compile Include="exercises\codewar.py" />
+    <Compile Include="exercises\practice-python\01.py" />
+    <Compile Include="exercises\practice-python\02.py" />
+    <Compile Include="exercises\practice-python\03.py" />
+    <Compile Include="exercises\practice-python\04.py" />
+    <Compile Include="exercises\practice-python\05.py" />
+    <Compile Include="exercises\practice-python\06.py" />
+    <Compile Include="exercises\practice-python\07.py" />
+    <Compile Include="exercises\practice-python\08.py" />
+    <Compile Include="exercises\practice-python\09.py" />
+    <Compile Include="exercises\practice-python\10.py" />
+    <Compile Include="machine-learning\regression.py" />
+    <Compile Include="main.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="django\" />
+    <Folder Include="django\django-polls\" />
+    <Folder Include="django\django-polls\dist\" />
+    <Folder Include="django\django-polls\django_polls.egg-info\" />
+    <Folder Include="django\django-polls\docs\" />
+    <Folder Include="django\django-polls\polls\" />
+    <Folder Include="django\django-polls\polls\migrations\" />
+    <Folder Include="django\django-polls\polls\migrations\__pycache__\" />
+    <Folder Include="django\django-polls\polls\static\" />
+    <Folder Include="django\django-polls\polls\static\polls\" />
+    <Folder Include="django\django-polls\polls\static\polls\images\" />
+    <Folder Include="django\django-polls\polls\templates\" />
+    <Folder Include="django\django-polls\polls\templates\polls\" />
+    <Folder Include="django\django-polls\polls\__pycache__\" />
+    <Folder Include="django\mysite\" />
+    <Folder Include="django\mysite\__pycache__\" />
+    <Folder Include="django\templates\" />
+    <Folder Include="django\templates\admin\" />
+    <Folder Include="exercises\" />
+    <Folder Include="exercises\practice-python\" />
+    <Folder Include="machine-learning\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="django\db.sqlite3" />
+    <Content Include="django\django-polls\dist\django-polls-0.1.tar.gz" />
+    <Content Include="django\django-polls\django_polls.egg-info\dependency_links.txt" />
+    <Content Include="django\django-polls\django_polls.egg-info\PKG-INFO" />
+    <Content Include="django\django-polls\django_polls.egg-info\SOURCES.txt" />
+    <Content Include="django\django-polls\django_polls.egg-info\top_level.txt" />
+    <Content Include="django\django-polls\LICENSE" />
+    <Content Include="django\django-polls\MANIFEST.in" />
+    <Content Include="django\django-polls\polls\migrations\__pycache__\0001_initial.cpython-36.pyc" />
+    <Content Include="django\django-polls\polls\migrations\__pycache__\__init__.cpython-36.pyc" />
+    <Content Include="django\django-polls\polls\static\polls\images\3d-background-gif-wallpaper.gif" />
+    <Content Include="django\django-polls\polls\static\polls\style.css" />
+    <Content Include="django\django-polls\polls\templates\polls\detail.html" />
+    <Content Include="django\django-polls\polls\templates\polls\index.html" />
+    <Content Include="django\django-polls\polls\templates\polls\results.html" />
+    <Content Include="django\django-polls\polls\__pycache__\admin.cpython-36.pyc" />
+    <Content Include="django\django-polls\polls\__pycache__\apps.cpython-36.pyc" />
+    <Content Include="django\django-polls\polls\__pycache__\models.cpython-36.pyc" />
+    <Content Include="django\django-polls\polls\__pycache__\tests.cpython-36.pyc" />
+    <Content Include="django\django-polls\polls\__pycache__\urls.cpython-36.pyc" />
+    <Content Include="django\django-polls\polls\__pycache__\views.cpython-36.pyc" />
+    <Content Include="django\django-polls\polls\__pycache__\__init__.cpython-36.pyc" />
+    <Content Include="django\django-polls\README.rst" />
+    <Content Include="django\mysite\__pycache__\settings.cpython-36.pyc" />
+    <Content Include="django\mysite\__pycache__\urls.cpython-36.pyc" />
+    <Content Include="django\mysite\__pycache__\wsgi.cpython-36.pyc" />
+    <Content Include="django\mysite\__pycache__\__init__.cpython-36.pyc" />
+    <Content Include="django\templates\admin\base_site.html" />
+    <Content Include="exercises\practice-python\site" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
 </Project>
