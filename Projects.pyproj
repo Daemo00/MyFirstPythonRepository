@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{a7da97b4-a368-4d78-bb31-0293aed789f0}</ProjectGuid>
     <ProjectHome />
-    <StartupFile />
+    <StartupFile>artificial-intelligence\machine-learning\deep-learning\Assignment1.py</StartupFile>
     <SearchPath>..\..\..\VisualStudioCodeProjects\PythonProjects\MyFirstPythonProject\</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -22,6 +22,15 @@
     <InterpreterReference Include="Global|ContinuumAnalytics|Anaconda36-64" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="artificial-intelligence\generic.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="artificial-intelligence\machine-learning\deep-learning\Assignment1.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="artificial-intelligence\machine-learning\deep-learning\softmax.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="django\django-polls\polls\admin.py" />
     <Compile Include="django\django-polls\polls\apps.py" />
     <Compile Include="django\django-polls\polls\migrations\0001_initial.py" />
@@ -48,10 +57,12 @@
     <Compile Include="exercises\practice-python\08.py" />
     <Compile Include="exercises\practice-python\09.py" />
     <Compile Include="exercises\practice-python\10.py" />
-    <Compile Include="machine-learning\regression.py" />
+    <Compile Include="artificial-intelligence\machine-learning\generic.py" />
     <Compile Include="main.py" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="artificial-intelligence\machine-learning\deep-learning\" />
+    <Folder Include="artificial-intelligence\machine-learning\deep-learning\data\" />
     <Folder Include="django\" />
     <Folder Include="django\django-polls\" />
     <Folder Include="django\django-polls\dist\" />
@@ -72,9 +83,11 @@
     <Folder Include="django\templates\admin\" />
     <Folder Include="exercises\" />
     <Folder Include="exercises\practice-python\" />
-    <Folder Include="machine-learning\" />
+    <Folder Include="artificial-intelligence\machine-learning\" />
+    <Folder Include="artificial-intelligence\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="artificial-intelligence\machine-learning\deep-learning\data\notMNIST_small.tar.gz" />
     <Content Include="django\db.sqlite3" />
     <Content Include="django\django-polls\dist\django-polls-0.1.tar.gz" />
     <Content Include="django\django-polls\django_polls.egg-info\dependency_links.txt" />
