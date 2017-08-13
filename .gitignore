@@ -50,5 +50,12 @@ coverage.xml
 
 # Sphinx documentation
 docs/_build/
-/artificial-intelligence/machine-learning/deep-learning/data/notMNIST_small.tar.gz
-/artificial-intelligence/machine-learning/deep-learning/data/notMNIST_small.tar.gz
+/artificial-intelligence/machine-learning/deep-learning/data
+.idea/Jupiter Notebook.iml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+.idea/workspace.xml
+.spyproject/
+artificial-intelligence/machine-learning/deep-learning/.ipynb_checkpoints/
+django/django-polls/docs/
