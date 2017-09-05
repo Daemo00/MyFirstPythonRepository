@@ -1,3 +1,4 @@
+# %% Modules loading
 # These are all the modules we'll be using later. Make sure you can import them
 # before proceeding further.
 import os
@@ -13,7 +14,7 @@ from six.moves.urllib.request import urlretrieve
 # Config the matplotlib backend as plotting inline in IPython
 # % matplotlib inline
 
-
+#%% Download data
 url = 'https://commondatastorage.googleapis.com/books1000/'
 last_percent_reported = None
 data_root = '.\data'  # Change me to store data elsewhere
@@ -55,9 +56,9 @@ def maybe_download(filename, expected_bytes, force=False):
 train_filename = maybe_download('notMNIST_large.tar.gz', 247336696)
 test_filename = maybe_download('notMNIST_small.tar.gz', 8458043)
 
+#%% Extract downloaded files
 num_classes = 10
 np.random.seed(133)
-
 
 def maybe_extract(filename, force=False):
     root = os.path.splitext(os.path.splitext(filename)[0])[0]  # remove .tar.gz
@@ -85,6 +86,7 @@ train_folders = maybe_extract(train_filename)
 test_folders = maybe_extract(test_filename)
 
 
+#%% Show sample of downloaded files
 def show_images_horizontally(list_of_files):
     fig = plt.figure()
     number_of_files = len(list_of_files)
@@ -107,9 +109,9 @@ def show_image_sample(data_folders):
 show_image_sample(train_folders)
 show_image_sample(test_folders)
 
+#%% Load files in pickles
 image_size = 28  # Pixel width and height.
 pixel_depth = 255.0  # Number of levels per pixel.
-
 
 def load_letter(folder, min_num_images):
     """Load the data for a single letter label."""
@@ -164,6 +166,7 @@ train_datasets = maybe_pickle(train_folders, 45000)
 test_datasets = maybe_pickle(test_folders, 1800)
 
 
+#%% Show sample of data from pickles
 def showDataHorizontally(list_of_data):
     fig = plt.figure()
     number_of_data = len(list_of_data)
@@ -171,11 +174,12 @@ def showDataHorizontally(list_of_data):
         fig.add_subplot(1, number_of_data, i + 1)
         plt.imshow(list_of_data[i], cmap='Greys_r')
         plt.axis('off')
+        plt.title(i)
 
 
-def showDataSample(datasets):
+def showDataSample(list_of_datasets):
     class_data = []
-    for dataset in datasets:
+    for dataset in list_of_datasets:
         with open(dataset, 'rb') as f:
             x = pickle.load(f)
         random_index = np.random.randint(0, len(x) - 1)
@@ -187,6 +191,7 @@ showDataSample(train_datasets)
 showDataSample(test_datasets)
 
 
+#%% Verify balancing in pickles
 def verifyBalancing(datasets):
     pass
 
@@ -195,6 +200,7 @@ verifyBalancing(train_datasets)
 verifyBalancing(test_datasets)
 
 
+#%% Merge datasets with labels
 def make_arrays(nb_rows, img_size):
     if nb_rows:
         dataset = np.ndarray((nb_rows, img_size, img_size), dtype=np.float32)
@@ -251,6 +257,7 @@ print('Validation:', valid_dataset.shape, valid_labels.shape)
 print('Testing:', test_dataset.shape, test_labels.shape)
 
 
+#%% Randomize datasets
 def randomize(dataset, labels):
     permutation = np.random.permutation(labels.shape[0])
     shuffled_dataset = dataset[permutation, :, :]
@@ -261,3 +268,70 @@ def randomize(dataset, labels):
 train_dataset, train_labels = randomize(train_dataset, train_labels)
 test_dataset, test_labels = randomize(test_dataset, test_labels)
 valid_dataset, valid_labels = randomize(valid_dataset, valid_labels)
+
+
+# %% Show data after randomization
+def showDataWithLabelsHorizontally(list_of_labels_with_data):
+    fig = plt.figure()
+    number_of_data = len(list_of_labels_with_data)
+    for i in range(number_of_data):
+        fig.add_subplot(1, number_of_data, i + 1)
+        plt.imshow(list_of_labels_with_data[i][1], cmap='Greys_r')
+        plt.axis('off')
+        plt.title(list_of_labels_with_data[i][0])
+
+
+def showDataWithLabelsSample(dataset, labels):
+    class_data = []
+    for i in range(num_classes):
+        random_index = np.random.randint(0, len(dataset) - 1)
+        class_data.append([labels[random_index], dataset[random_index]])
+    showDataWithLabelsHorizontally(class_data)
+
+
+showDataWithLabelsSample(train_dataset, train_labels)
+showDataWithLabelsSample(test_dataset, test_labels)
+
+# %% Save generated datasets
+
+pickle_file = os.path.join(data_root, 'notMNIST.pickle')
+
+try:
+    with open(pickle_file, 'wb') sa f:
+        save = {
+            'train_dataset': train_dataset,
+            'train_labels': train_labels,
+            'valid_dataset': valid_dataset,
+            'valid_labels': valid_labels,
+            'test_dataset': test_dataset,
+            'test_labels': test_labels,
+        }
+        pickle.dump(save, f, pickle.HIGHEST_PROTOCOL)
+except Exception as e:
+    print('Unable to save data to', pickle_file, ':', e)
+    raise
+
+statinfo = os.stat(pickle_file)
+print('Compressed pickle size:', statinfo.st_size)
+
+# %% Create sanitized datasets (without duplicates)
+# TODO
+pickle_file_sanitized = os.path.join(data_root, 'notMNIST_sanitized.pickle')
+
+try:
+    with open(pickle_file_sanitized, 'wb') as f:
+        save = {
+            'train_dataset': train_dataset_sanitized,
+            'train_labels': train_labels_sanitized,
+            'valid_dataset': valid_dataset_sanitized,
+            'valid_labels': valid_labels_sanitized,
+            'test_dataset': test_dataset_sanitized,
+            'test_labels': test_labels_sanitized,
+        }
+        pickle.dump(save, f, pickle.HIGHEST_PROTOCOL)
+except Exception as e:
+    print('Unable to save data to', pickle_file, ':', e)
+    raise
+
+statinfo = os.stat(pickle_file)
+print('Compressed pickle size sanitized:', statinfo.st_size)

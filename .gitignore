@@ -55,3 +55,6 @@ docs/_build/
 .spyproject/
 artificial-intelligence/machine-learning/deep-learning/.ipynb_checkpoints/
 django/django-polls/docs/
+/artificial-intelligence/machine-learning/deep-learning/neural-networks/tensorflow-mnist-tutorial/.idea/*
+/artificial-intelligence/machine-learning/deep-learning/neural-networks/tensorflow-mnist-tutorial/.spyproject/*
+/artificial-intelligence/machine-learning/deep-learning/neural-networks/tensorflow-mnist-tutorial/data/*
