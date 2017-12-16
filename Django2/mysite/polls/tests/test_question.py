@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.utils import timezone
 from django.test import TestCase
 
-from .models import Question
+from ..models.question import Question
 
 
 class QuestionModelTests(TestCase):
@@ -45,7 +45,11 @@ def create_question(question_text, days):
     in the past, positive for questions that have yet to be published).
     """
     time = timezone.now() + datetime.timedelta(days=days)
-    return Question.objects.create(question_text=question_text, pub_date=time)
+    question = Question.objects.create(
+        question_text=question_text, pub_date=time)
+    question.choice_set.create(
+        choice_text='Choice', votes=0)
+    return question
 
 
 class QuestionIndexViewTests(TestCase):
@@ -104,3 +108,45 @@ class QuestionIndexViewTests(TestCase):
             response.context['latest_question_list'],
             ['<Question: Past question 2.>', '<Question: Past question 1.>']
         )
+
+
+class QuestionDetailViewTests(TestCase):
+    def test_future_question(self):
+        """
+        The detail view of a question with a pub_date in the future
+        returns a 404 not found.
+        """
+        future_question = create_question(
+            question_text='Future question.', days=5)
+        url = reverse('polls:detail', args=(future_question.id,))
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 404)
+
+    def test_past_question(self):
+        """
+        The detail view of a question with a pub_date in the past
+        displays the question's text.
+        """
+        past_question = create_question(
+            question_text='Past Question.', days=-5)
+        url = reverse('polls:detail', args=(past_question.id,))
+        response = self.client.get(url)
+        self.assertContains(response, past_question.question_text)
+
+
+class QuestionVote(TestCase):
+
+    def test_vote_succeed(self):
+        question = create_question(
+            question_text='Question.', days=-5)
+        url = reverse('polls:vote', args=(question.id,))
+        response = self.client.post(url, data={'choice': 0})
+        self.assertNotContains(
+            response, "You didn't select a choice.", status_code=302)
+
+    def test_vote_fail(self):
+        question = create_question(
+            question_text='Question.', days=-5)
+        url = reverse('polls:vote', args=(question.id,))
+        response = self.client.get(url)
+        self.assertContains(response, "You didn&#39;t select a choice.")

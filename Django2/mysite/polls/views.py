@@ -5,7 +5,8 @@ from django.urls import reverse
 from django.utils import timezone
 from django.views import generic
 
-from .models import Choice, Question
+from .models.question import Question
+from .models.choice import Choice
 
 
 class IndexView(generic.ListView):
@@ -26,6 +27,12 @@ class DetailView(generic.DetailView):
     model = Question
     template_name = 'polls/detail.html'
 
+    def get_queryset(self):
+        """
+        Excludes any questions that aren't published yet.
+        """
+        return Question.objects.filter(pub_date__lte=timezone.now())
+
 
 class ResultsView(generic.DetailView):
     model = Question
@@ -35,7 +42,7 @@ class ResultsView(generic.DetailView):
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     try:
-        question.choice_set.filter(pk=request.POST['choice'])\
+        question.choice_set.filter(pk=request.POST['choice']) \
             .update(votes=F('votes') + 1)
         # Always return an HttpResponseRedirect after successfully dealing
         # with POST data. This prevents data from being posted twice if a
